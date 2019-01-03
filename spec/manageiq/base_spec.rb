@@ -1,7 +1,6 @@
-require 'util/vmdb-logger'
-require 'util/miq-password'
+require 'manageiq/loggers/base'
 
-describe VMDBLogger do
+describe ManageIQ::Loggers::Base do
   describe "#log_hashes" do
     let(:buffer) { StringIO.new }
     let(:logger) { described_class.new(buffer) }
@@ -83,7 +82,7 @@ b:
   end
 
   context "long messages" do
-    let(:logger) { VMDBLogger.new(@log) }
+    let(:logger) { described_class.new(@log) }
 
     it "truncates long messages when max_message_size is set" do
       msg = "a" * 1_572_864 # 1.5 mb in bytes

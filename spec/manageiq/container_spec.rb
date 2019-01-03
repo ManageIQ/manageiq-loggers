@@ -1,4 +1,6 @@
-describe Vmdb::Loggers::ContainerLogger::Formatter do
+require 'manageiq/loggers/container'
+
+describe ManageIQ::Loggers::Container::Formatter do
   it "stuff" do
     time = Time.now
     result = described_class.new.call("INFO", time, "some_program", "testing 1, 2, 3")
@@ -10,7 +12,7 @@ describe Vmdb::Loggers::ContainerLogger::Formatter do
       "pid"        => $PROCESS_ID,
       "service"    => "some_program",
       "tid"        => Thread.current.object_id.to_s(16),
-    }.delete_nils
+    }.compact
     expect(JSON.parse(result)).to eq(expected)
   end
 end

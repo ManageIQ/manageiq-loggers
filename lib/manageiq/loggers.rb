@@ -1,7 +1,3 @@
+require "manageiq/loggers/base"
+require "manageiq/loggers/container"
 require "manageiq/loggers/version"
-
-module Manageiq
-  module Loggers
-    # Your code goes here...
-  end
-end

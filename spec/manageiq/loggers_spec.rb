@@ -1,4 +1,4 @@
-RSpec.describe Manageiq::Loggers do
+describe Manageiq::Loggers do
   it "has a version number" do
     expect(Manageiq::Loggers::VERSION).not_to be nil
   end

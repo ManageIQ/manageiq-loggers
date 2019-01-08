@@ -1,13 +1,11 @@
-# Manageiq::Loggers
+# ManageIQ::Loggers
 
 [![Build Status](https://travis-ci.org/ManageIQ/manageiq-loggers.svg)](https://travis-ci.org/ManageIQ/manageiq-loggers)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8d3c9bf77c45a024166b/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-loggers/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8d3c9bf77c45a024166b/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-loggers/test_coverage)
 [![Security](https://hakiri.io/github/ManageIQ/manageiq-loggers/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-loggers/master)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/manageiq/loggers`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Loggers for ManageIQ projects
 
 ## Installation
 
@@ -24,10 +22,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install manageiq-loggers
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 

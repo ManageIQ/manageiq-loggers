@@ -1,5 +1,10 @@
 # Manageiq::Loggers
 
+[![Build Status](https://travis-ci.org/ManageIQ/manageiq-loggers.svg)](https://travis-ci.org/ManageIQ/manageiq-loggers)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8d3c9bf77c45a024166b/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-loggers/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8d3c9bf77c45a024166b/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-loggers/test_coverage)
+[![Security](https://hakiri.io/github/ManageIQ/manageiq-loggers/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-loggers/master)
+
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/manageiq/loggers`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 TODO: Delete this and the text above, and describe your gem
@@ -33,3 +38,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/manageiq-loggers.
+
+## License
+
+This project is available as open source under the terms of the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).

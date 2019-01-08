@@ -1,5 +1,10 @@
+if ENV['CI']
+  require 'simplecov'
+  SimpleCov.start
+end
+
 require "bundler/setup"
-require "manageiq/loggers"
+require "manageiq-loggers"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

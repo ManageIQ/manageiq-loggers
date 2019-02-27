@@ -2,6 +2,8 @@ module ManageIQ
   module Loggers
     class Container < Base
       def initialize(logdev = STDOUT, *args)
+        logdev.sync = true # Don't buffer container log output
+
         super
         self.level = DEBUG
         self.formatter = Formatter.new

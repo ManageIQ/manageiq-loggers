@@ -3,11 +3,9 @@ require "systemd-journal"
 module ManageIQ
   module Loggers
     class Journald < Base
-      def initialize(progname = nil)
-        self.level     = INFO
+      def initialize(logdev = nil, *args)
+        super(logdev, *args)
         self.formatter = Formatter.new
-
-        @local_levels = {}
       end
 
       def filename
@@ -29,7 +27,7 @@ module ManageIQ
           end
         end
 
-        message = formatter.call(severity, message)
+        message = formatter.call(format_severity(severity), progname, message)
 
         Systemd::Journal.print(LOG_LEVEL_MAP[severity], message)
       end
@@ -46,8 +44,9 @@ module ManageIQ
       }
 
       class Formatter < Base::Formatter
-        def call(severity, msg)
-          prefix_task_id(msg2str(msg))
+        def call(severity, progname, msg)
+          msg = prefix_task_id(msg2str(msg))
+          "%5s -- %s: %s\n" % [severity, progname, msg]
         end
       end
     end

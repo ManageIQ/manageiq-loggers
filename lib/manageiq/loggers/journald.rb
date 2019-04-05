@@ -1,9 +1,10 @@
-require "systemd-journal"
 
 module ManageIQ
   module Loggers
     class Journald < Base
       def initialize(logdev = nil, *args)
+        require "systemd-journal"
+
         super(logdev, *args)
         self.formatter = Formatter.new
       end

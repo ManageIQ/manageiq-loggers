@@ -1,4 +1,3 @@
-
 module ManageIQ
   module Loggers
     class Journald < Base

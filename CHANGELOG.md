@@ -3,7 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.2.0] - 2019-05-03
+
+## Added
+- Log the request id in the container logger if present [(#7)](https://github.com/ManageIQ/manageiq-loggers/pull/7)
 
 ## [0.1.1] - 2019-02-27
 

@@ -44,6 +44,7 @@ module ManageIQ
             :service    => progname,
             :level      => translate_error(severity),
             :message    => prefix_task_id(msg2str(msg)),
+            :request_id => request_id
             # :tags => "tags string",
           }.compact.to_json << "\n"
         end
@@ -60,6 +61,10 @@ module ManageIQ
 
         def translate_error(level)
           SEVERITY_MAP[level] || "unknown"
+        end
+
+        def request_id
+          Thread.current[:current_request]&.request_id
         end
       end
     end

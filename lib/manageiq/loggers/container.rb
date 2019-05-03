@@ -64,7 +64,7 @@ module ManageIQ
         end
 
         def request_id
-          Thread.current[:current_request]&.request_id || "unknown"
+          Thread.current[:current_request]&.request_id
         end
       end
     end

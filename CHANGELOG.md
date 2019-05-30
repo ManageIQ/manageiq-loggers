@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.0] - 2019-05-30
+
+## Added
+- Add a Journald Logger [(#5)](https://github.com/ManageIQ/manageiq-loggers/pull/5)
+- Add a cloud watch logger [(#9)](https://github.com/ManageIQ/manageiq-loggers/pull/9)
+
 ## [0.2.0] - 2019-05-03
 
 ## Added

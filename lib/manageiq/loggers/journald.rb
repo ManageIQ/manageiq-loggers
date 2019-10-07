@@ -46,6 +46,7 @@ module ManageIQ
         message = formatter.call(format_severity(severity), progname, message)
         caller_object = caller_locations.last
 
+        # TODO: Allow the syslog facility to be set via the configuration settings.
         Systemd::Journal.message(
           :message           => message,
           :message_id        => message_id,

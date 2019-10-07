@@ -52,19 +52,27 @@ module ManageIQ
       #
       def determine_identifier(message)
         case message
-        when /amazon/i
+        when /Amazon/
           'cfme-aws'
-        when /azure/i
+        when /Azure/
           'cfme-azure'
-        when /google/i
+        when /Google/
           'cfme-google'
-        when /openshift/i
-          'cfme-openshift'
-        when /openstack/i
-          'cfme-openstack'
-        when /microsoft|scvmm/i
+        when /Kubernetes/
+          'cfme-kubernetes'
+        when /Kubevirt/
+          'cfme-kubevirt'
+        when /Microsoft/
           'cfme-scvmm'
-        when /vmware/i
+        when /Nuage/
+          'cfme-nuage'
+        when /Openshift/
+          'cfme-openshift'
+        when /Openstack/
+          'cfme-openstack'
+        when /Redhat/
+          'cfme-ovirt'
+        when /Vmware/
           'cfme-vmware'
         else
           'cmfe'

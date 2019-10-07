@@ -37,7 +37,7 @@ module ManageIQ
           :message_id        => message_id,
           :priority          => log_level_map[severity],
           :application       => 'cfme',
-          :syslog_identifier => 'cfme',
+          :syslog_identifier => determine_identifier(message),
           :syslog_facility   => 'local3',
           :code_line         => caller_object.lineno,
           :code_file         => caller_object.absolute_path
@@ -45,6 +45,31 @@ module ManageIQ
       end
 
       private
+
+      # Determine the identifier based on the message. Ideally this would
+      # be set by the provider once we have pluggable loggers, but for now
+      # we parse the message.
+      #
+      def determine_identifier(message)
+        case message
+        when /amazon/i
+          'cfme-aws'
+        when /azure/i
+          'cfme-azure'
+        when /google/i
+          'cfme-google'
+        when /openshift/i
+          'cfme-openshift'
+        when /openstack/i
+          'cfme-openstack'
+        when /microsoft|scvmm/i
+          'cfme-scvmm'
+        when /vmware/i
+          'cfme-vmware'
+        else
+          'cmfe'
+        end
+      end
 
       def log_level_map
         @log_level_map ||= {

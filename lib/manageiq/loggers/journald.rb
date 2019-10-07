@@ -1,8 +1,16 @@
 module ManageIQ
   module Loggers
     class Journald < Base
+      # A UUID string that is used to identify the logger instance.
       attr_accessor :message_id
 
+      # Create and return a new ManageIQ::Loggers::Journald instance. The
+      # arguments to the initializer can be ignored unless you're multicasting.
+      #
+      # Internally we set our own formatter, as well as a single message ID
+      # per instance, which is then passed on to journald as the MESSAGE_ID
+      # attribute.
+      #
       def initialize(logdev = nil, *args)
         require "systemd-journal"
         super(logdev, *args)
@@ -10,10 +18,16 @@ module ManageIQ
         self.message_id = SecureRandom.uuid.tr('-','')
       end
 
+      # Comply with the VMDB::Logger interface. For a filename we simply use
+      # the string 'journald' since we're not using a backing file directly.
+      #
       def filename
         "journald"
       end
 
+      # Redefine this method from the core Logger class. Internally this is
+      # the method used when .info, .warn, etc are called.
+      #
       def add(severity, message = nil, progname = nil)
         severity ||= Logger::UNKNOWN
         return true if severity < @level
@@ -79,6 +93,9 @@ module ManageIQ
         end
       end
 
+      # Map the Systemd::Journal error levels to the Logger error levels. For
+      # unknown, we go with alert level.
+      #
       def log_level_map
         @log_level_map ||= {
           Logger::UNKNOWN => Systemd::Journal::LOG_ALERT,

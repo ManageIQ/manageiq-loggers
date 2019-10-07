@@ -1,11 +1,13 @@
 module ManageIQ
   module Loggers
     class Journald < Base
+      attr_accessor :message_id
+
       def initialize(logdev = nil, *args)
         require "systemd-journal"
-
         super(logdev, *args)
         self.formatter = Formatter.new
+        self.message_id = SecureRandom.uuid.tr('-','')
       end
 
       def filename
@@ -28,8 +30,18 @@ module ManageIQ
         end
 
         message = formatter.call(format_severity(severity), progname, message)
+        caller_object = caller_locations.last
 
-        Systemd::Journal.print(log_level_map[severity], message)
+        Systemd::Journal.message(
+          :message           => message,
+          :message_id        => message_id,
+          :priority          => log_level_map[severity],
+          :application       => 'cfme',
+          :syslog_identifier => 'cfme',
+          :syslog_facility   => 'local3',
+          :code_line         => caller_object.lineno,
+          :code_file         => caller_object.absolute_path
+        )
       end
 
       private

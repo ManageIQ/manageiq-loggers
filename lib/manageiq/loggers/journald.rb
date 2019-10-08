@@ -51,7 +51,7 @@ module ManageIQ
           :message           => message,
           :message_id        => message_id,
           :priority          => log_level_map[severity],
-          :application       => 'cfme',
+          :application       => 'manageiq',
           :syslog_identifier => determine_identifier(message),
           :syslog_facility   => 'local3',
           :code_line         => caller_object.lineno,
@@ -68,29 +68,29 @@ module ManageIQ
       def determine_identifier(message)
         case message
         when /Amazon/
-          'cfme-aws'
+          'manageiq-aws'
         when /Azure/
-          'cfme-azure'
+          'manageiq-azure'
         when /Google/
-          'cfme-google'
+          'manageiq-google'
         when /Kubernetes/
-          'cfme-kubernetes'
+          'manageiq-kubernetes'
         when /Kubevirt/
-          'cfme-kubevirt'
+          'manageiq-kubevirt'
         when /Microsoft/
-          'cfme-scvmm'
+          'manageiq-scvmm'
         when /Nuage/
-          'cfme-nuage'
+          'manageiq-nuage'
         when /Openshift/
-          'cfme-openshift'
+          'manageiq-openshift'
         when /Openstack/
-          'cfme-openstack'
+          'manageiq-openstack'
         when /Redhat/
-          'cfme-ovirt'
+          'manageiq-ovirt'
         when /Vmware/
-          'cfme-vmware'
+          'manageiq-vmware'
         else
-          'cmfe'
+          'manageiq'
         end
       end
 

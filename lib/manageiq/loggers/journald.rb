@@ -21,6 +21,7 @@ module ManageIQ
         super(logdev, *args)
         @formatter = Formatter.new
         @progname ||= 'manageiq'
+        @application ||= 'manageiq'
         @syslog_facility ||= 'local3'
         @syslog_identifier ||= @progname
       end

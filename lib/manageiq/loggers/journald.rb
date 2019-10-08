@@ -1,21 +1,28 @@
 module ManageIQ
   module Loggers
     class Journald < Base
-      # A UUID string that is used to identify the logger instance.
-      attr_accessor :message_id
+      # An identifier passed on to the logger message. The default is 'manageiq'.
+      attr_accessor :application
+
+      # The syslog facility used when writing messages. The default is 'local3'.
+      attr_accessor :syslog_facility
+
+      # An syslog identifier used when writing messages. The default is the progname.
+      attr_accessor :syslog_identifier
 
       # Create and return a new ManageIQ::Loggers::Journald instance. The
       # arguments to the initializer can be ignored unless you're multicasting.
       #
-      # Internally we set our own formatter, as well as a single message ID
-      # per instance, which is then passed on to journald as the MESSAGE_ID
-      # attribute.
+      # Internally we set our own formatter, and automatically set the
+      # progname option to 'manageiq' if not specified.
       #
       def initialize(logdev = nil, *args)
         require "systemd-journal"
         super(logdev, *args)
-        self.formatter = Formatter.new
-        self.message_id = SecureRandom.uuid.tr('-','')
+        @formatter = Formatter.new
+        @progname ||= 'manageiq'
+        @syslog_facility ||= 'local3'
+        @syslog_identifier ||= @progname
       end
 
       # Comply with the VMDB::Logger interface. For a filename we simply use
@@ -49,50 +56,16 @@ module ManageIQ
         # TODO: Allow the syslog facility to be set via the configuration settings.
         Systemd::Journal.message(
           :message           => message,
-          :message_id        => message_id,
           :priority          => log_level_map[severity],
-          :application       => 'manageiq',
-          :syslog_identifier => determine_identifier(message),
-          :syslog_facility   => 'local3',
+          :application       => application,
+          :syslog_identifier => syslog_identifier,
+          :syslog_facility   => syslog_facility,
           :code_line         => caller_object.lineno,
           :code_file         => caller_object.absolute_path
         )
       end
 
       private
-
-      # Determine the identifier based on the message. Ideally this would
-      # be set by the provider once we have pluggable loggers, but for now
-      # we parse the message.
-      #
-      def determine_identifier(message)
-        case message
-        when /Amazon/
-          'manageiq-aws'
-        when /Azure/
-          'manageiq-azure'
-        when /Google/
-          'manageiq-google'
-        when /Kubernetes/
-          'manageiq-kubernetes'
-        when /Kubevirt/
-          'manageiq-kubevirt'
-        when /Microsoft/
-          'manageiq-scvmm'
-        when /Nuage/
-          'manageiq-nuage'
-        when /Openshift/
-          'manageiq-openshift'
-        when /Openstack/
-          'manageiq-openstack'
-        when /Redhat/
-          'manageiq-ovirt'
-        when /Vmware/
-          'manageiq-vmware'
-        else
-          'manageiq'
-        end
-      end
 
       # Map the Systemd::Journal error levels to the Logger error levels. For
       # unknown, we go with alert level.

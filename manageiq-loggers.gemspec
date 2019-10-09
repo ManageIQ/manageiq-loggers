@@ -5,7 +5,7 @@ require "manageiq/loggers/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "manageiq-loggers"
-  spec.version       = Manageiq::Loggers::VERSION
+  spec.version       = ManageIQ::Loggers::VERSION
   spec.authors       = ["ManageIQ Authors"]
 
   spec.summary       = %q{Loggers for ManageIQ projects}

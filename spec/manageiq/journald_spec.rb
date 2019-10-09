@@ -3,17 +3,6 @@ require 'manageiq/loggers/journald'
 RSpec.describe ManageIQ::Loggers::Journald, :systemd do
   let(:logger) { described_class.new }
 
-  context "application accessor" do
-    it "has an application accessor" do
-      expect(logger).to respond_to(:application)
-      expect(logger).to respond_to(:application=)
-    end
-
-    it "sets the default application to manageiq" do
-      expect(logger.application).to eql('manageiq')
-    end
-  end
-
   context "progname" do
     it "sets the progname to manageiq by default" do
       expect(logger.progname).to eql('manageiq')

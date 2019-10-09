@@ -1,9 +1,6 @@
 module ManageIQ
   module Loggers
     class Journald < Base
-      # An identifier passed on to the logger message. The default is 'manageiq'.
-      attr_accessor :application
-
       # The syslog facility used when writing messages. The default is 'local3'.
       attr_accessor :syslog_facility
 
@@ -21,7 +18,6 @@ module ManageIQ
         super(logdev, *args)
         @formatter = Formatter.new
         @progname ||= 'manageiq'
-        @application ||= 'manageiq'
         @syslog_facility ||= 'local3'
         @syslog_identifier ||= @progname
       end
@@ -58,7 +54,6 @@ module ManageIQ
         Systemd::Journal.message(
           :message           => message,
           :priority          => log_level_map[severity],
-          :application       => application,
           :syslog_identifier => syslog_identifier,
           :syslog_facility   => syslog_facility,
           :code_line         => caller_object.lineno,

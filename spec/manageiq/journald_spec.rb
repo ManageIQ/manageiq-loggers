@@ -1,6 +1,6 @@
 require 'manageiq/loggers/journald'
 
-RSpec.describe ManageIQ::Loggers::Journald, :systemd do
+RSpec.describe ManageIQ::Loggers::Journald, :linux do
   let(:logger) { described_class.new }
 
   context "progname" do

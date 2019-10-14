@@ -5,6 +5,7 @@ end
 
 require "bundler/setup"
 require "manageiq-loggers"
+require "rbconfig"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -12,5 +13,9 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  if RbConfig::CONFIG["host_os"] !~ /linux/
+    config.filter_run_excluding(:linux => true)
   end
 end

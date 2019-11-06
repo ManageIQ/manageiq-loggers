@@ -9,17 +9,6 @@ RSpec.describe ManageIQ::Loggers::Journald, :linux do
     end
   end
 
-  context "syslog_facility accessor" do
-    it "has a syslog_facility accessor" do
-      expect(logger).to respond_to(:syslog_facility)
-      expect(logger).to respond_to(:syslog_facility=)
-    end
-
-    it "sets the default syslog_facility to local3" do
-      expect(logger.syslog_facility).to eql('local3')
-    end
-  end
-
   context "syslog_identifier accessor" do
     it "has a syslog_identifier accessor" do
       expect(logger).to respond_to(:syslog_identifier)

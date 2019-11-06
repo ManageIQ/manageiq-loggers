@@ -2,6 +2,7 @@
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "manageiq/loggers/version"
+require "rbconfig"
 
 Gem::Specification.new do |spec|
   spec.name          = "manageiq-loggers"
@@ -29,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "systemd-journal" if RbConfig::CONFIG['host_os'] =~ /linux/i
 end

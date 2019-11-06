@@ -1,17 +1,33 @@
 module ManageIQ
   module Loggers
     class Journald < Base
+      # An syslog identifier used when writing messages. The default is the progname.
+      attr_accessor :syslog_identifier
+
+      # Create and return a new ManageIQ::Loggers::Journald instance. The
+      # arguments to the initializer can be ignored unless you're multicasting.
+      #
+      # Internally we set our own formatter, and automatically set the
+      # progname option to 'manageiq' if not specified.
+      #
       def initialize(logdev = nil, *args)
         require "systemd-journal"
-
         super(logdev, *args)
-        self.formatter = Formatter.new
+        @formatter = Formatter.new
+        @progname ||= 'manageiq'
+        @syslog_identifier ||= @progname
       end
 
+      # Comply with the VMDB::Logger interface. For a filename we simply use
+      # the string 'journald' since we're not using a backing file directly.
+      #
       def filename
         "journald"
       end
 
+      # Redefine this method from the core Logger class. Internally this is
+      # the method used when .info, .warn, etc are called.
+      #
       def add(severity, message = nil, progname = nil)
         severity ||= Logger::UNKNOWN
         return true if severity < @level
@@ -28,12 +44,22 @@ module ManageIQ
         end
 
         message = formatter.call(format_severity(severity), progname, message)
+        caller_object = caller_locations.last
 
-        Systemd::Journal.print(log_level_map[severity], message)
+        Systemd::Journal.message(
+          :message           => message,
+          :priority          => log_level_map[severity],
+          :syslog_identifier => syslog_identifier,
+          :code_line         => caller_object.lineno,
+          :code_file         => caller_object.absolute_path
+        )
       end
 
       private
 
+      # Map the Systemd::Journal error levels to the Logger error levels. For
+      # unknown, we go with alert level.
+      #
       def log_level_map
         @log_level_map ||= {
           Logger::UNKNOWN => Systemd::Journal::LOG_ALERT,

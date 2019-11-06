@@ -1,9 +1,6 @@
 module ManageIQ
   module Loggers
     class Journald < Base
-      # The syslog facility used when writing messages. The default is 'local3'.
-      attr_accessor :syslog_facility
-
       # An syslog identifier used when writing messages. The default is the progname.
       attr_accessor :syslog_identifier
 
@@ -18,7 +15,6 @@ module ManageIQ
         super(logdev, *args)
         @formatter = Formatter.new
         @progname ||= 'manageiq'
-        @syslog_facility ||= 'local3'
         @syslog_identifier ||= @progname
       end
 
@@ -50,12 +46,10 @@ module ManageIQ
         message = formatter.call(format_severity(severity), progname, message)
         caller_object = caller_locations.last
 
-        # TODO: Allow the syslog facility to be set via the configuration settings.
         Systemd::Journal.message(
           :message           => message,
           :priority          => log_level_map[severity],
           :syslog_identifier => syslog_identifier,
-          :syslog_facility   => syslog_facility,
           :code_line         => caller_object.lineno,
           :code_file         => caller_object.absolute_path
         )

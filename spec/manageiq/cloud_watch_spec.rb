@@ -11,12 +11,15 @@ describe ManageIQ::Loggers::CloudWatch do
       ENV["CW_AWS_ACCESS_KEY_ID"] = "test"
       ENV["CW_AWS_SECRET_ACCESS_KEY"] = "test"
       ENV["CLOUD_WATCH_LOG_GROUP"] = "test"
+      old_hostname = ENV["HOSTNAME"]
+      ENV["HOSTNAME"] = "test"
 
       example.run
 
       ENV.delete("CW_AWS_ACCESS_KEY_ID")
       ENV.delete("CW_AWS_SECRET_ACCESS_KEY")
       ENV.delete("CLOUD_WATCH_LOG_GROUP")
+      old_hostname.nil? ? ENV.delete("HOSTNAME") : ENV["HOSTNAME"] = old_hostname
     end
 
     before do

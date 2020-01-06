@@ -5,6 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.1] - 2020-01-06
+### Fixed
+- Change CloudWatch logger log_group and log_stream values for easier debugging and unique identifiers [(#15)](https://github.com/ManageIQ/manageiq-loggers/pull/15)
+- Enhancements to the journald logger to allow for easier debugging [(#11)](https://github.com/ManageIQ/manageiq-loggers/pull/11)
+
 ## [0.4.0] - 2019-08-15
 ### Changed
 - The Cloud Watch logger will now also broadcast its log messages to the container logger [(#10)](https://github.com/ManageIQ/manageiq-loggers/pull/10)
@@ -24,7 +29,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.0...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.1...master
+[0.4.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.1.1...v0.2.0

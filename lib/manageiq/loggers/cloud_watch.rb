@@ -11,7 +11,7 @@ module ManageIQ
         secret_access_key = ENV["CW_AWS_SECRET_ACCESS_KEY"].presence
         namespace         = File.exist?(NAMESPACE_FILE) ? File.read(NAMESPACE_FILE) : nil
         log_group_name    = namespace || ENV["CLOUD_WATCH_LOG_GROUP"].presence
-        log_stream_name   = File.exist?(NAMESPACE_FILE) ? File.read(NAMESPACE_FILE) : nil
+        log_stream_name   = ENV["HOSTNAME"].presence
 
         container_logger = ManageIQ::Loggers::Container.new
         return container_logger unless access_key_id && secret_access_key && log_group_name && log_stream_name

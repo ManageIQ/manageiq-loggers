@@ -24,8 +24,6 @@ describe ManageIQ::Loggers::CloudWatch do
 
     before do
       expect(CloudWatchLogger::Client::AWS_SDK::DeliveryThreadManager).to receive(:new).and_return(double("CloudWatchLogger::Client::AWS_SDK::DeliveryThreadManager", :deliver => nil))
-      expect(File).to receive(:exist?).with(described_class::NAMESPACE_FILE).and_return(true)
-      expect(File).to receive(:read).with(described_class::NAMESPACE_FILE).and_return("abc")
     end
 
     it "returns a CloudWatch::Client" do

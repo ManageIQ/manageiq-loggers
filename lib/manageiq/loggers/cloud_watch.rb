@@ -9,8 +9,7 @@ module ManageIQ
       def self.new(*args)
         access_key_id     = ENV["CW_AWS_ACCESS_KEY_ID"].presence
         secret_access_key = ENV["CW_AWS_SECRET_ACCESS_KEY"].presence
-        namespace         = File.exist?(NAMESPACE_FILE) ? File.read(NAMESPACE_FILE) : nil
-        log_group_name    = namespace || ENV["CLOUD_WATCH_LOG_GROUP"].presence
+        log_group_name    = ENV["CLOUD_WATCH_LOG_GROUP"].presence
         log_stream_name   = ENV["HOSTNAME"].presence
 
         container_logger = ManageIQ::Loggers::Container.new

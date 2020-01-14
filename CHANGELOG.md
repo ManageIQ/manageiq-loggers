@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.2] - 2020-01-14
+### Fixed
+- Revert "Change CloudWatch log_group to be the namespace if it exists" [(#16)](https://github.com/ManageIQ/manageiq-loggers/pull/16)
+
 ## [0.4.1] - 2020-01-06
 ### Fixed
 - Change CloudWatch logger log_group and log_stream values for easier debugging and unique identifiers [(#15)](https://github.com/ManageIQ/manageiq-loggers/pull/15)
@@ -29,7 +33,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.1...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.2...master
+[0.4.2]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.2.0...v0.3.0

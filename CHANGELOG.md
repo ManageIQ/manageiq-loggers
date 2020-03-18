@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.5.0] - 2020-03-18
+### Changed
+- Deprecate Thread.current[:current_request]&.request_id in favor of Thread.current[:request_id] [(#17)](https://github.com/ManageIQ/manageiq-loggers/pull/17)
+
 ## [0.4.2] - 2020-01-14
 ### Fixed
 - Revert "Change CloudWatch log_group to be the namespace if it exists" [(#16)](https://github.com/ManageIQ/manageiq-loggers/pull/16)
@@ -33,7 +37,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.2...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.5.0...master
+[0.5.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.3.0...v0.4.0

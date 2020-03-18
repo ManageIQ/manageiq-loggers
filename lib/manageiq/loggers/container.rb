@@ -64,7 +64,11 @@ module ManageIQ
         end
 
         def request_id
-          Thread.current[:current_request]&.request_id
+          if Thread.current[:current_request]&.request_id
+            ActiveSupport::Deprecation.warn("Usage of `Thread.current[:current_request]&.request_id` will be deprecated in version 0.5.0. Please switch to `Thread.current[:request_id]` to log request_id automatically.")
+          end
+
+          Thread.current[:current_request]&.request_id || Thread.current[:request_id]
         end
       end
     end

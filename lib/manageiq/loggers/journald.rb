@@ -44,7 +44,7 @@ module ManageIQ
         end
 
         message = formatter.call(format_severity(severity), progname, message)
-        caller_object = caller_locations.last
+        caller_object = caller_locations(3, 1).first
 
         Systemd::Journal.message(
           :message           => message,

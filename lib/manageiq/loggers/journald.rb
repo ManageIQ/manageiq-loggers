@@ -51,7 +51,8 @@ module ManageIQ
           :priority          => log_level_map[severity],
           :syslog_identifier => syslog_identifier,
           :code_line         => caller_object.lineno,
-          :code_file         => caller_object.absolute_path
+          :code_file         => caller_object.absolute_path,
+          :code_func         => caller_object.label
         )
       end
 

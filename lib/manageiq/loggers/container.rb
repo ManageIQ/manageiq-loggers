@@ -9,8 +9,9 @@ module ManageIQ
         self.formatter = Formatter.new
       end
 
-      def level=(_new_level)
-        super(DEBUG) # We want everything written to the ContainerLogger written to STDOUT
+      # Default to DEBUG, but allow changing via this method.
+      def level=(new_level = DEBUG)
+        super(new_level) # We want everything written to the ContainerLogger written to STDOUT
       end
 
       def filename

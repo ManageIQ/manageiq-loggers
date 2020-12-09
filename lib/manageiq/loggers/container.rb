@@ -36,7 +36,7 @@ module ManageIQ
         def call(severity, time, progname, msg)
           # From https://github.com/ViaQ/elasticsearch-templates/releases -> Downloads -> *.asciidoc
           # NOTE: These values are in a specific order for easier human readbility via STDOUT
-          {
+          payload = {
             :@timestamp => format_datetime(time),
             :hostname   => hostname,
             :pid        => $PROCESS_ID,
@@ -46,7 +46,8 @@ module ManageIQ
             :message    => prefix_task_id(msg2str(msg)),
             :request_id => request_id
             # :tags => "tags string",
-          }.compact.to_json << "\n"
+          }.compact
+          JSON.generate(payload) << "\n"
         end
 
         private
@@ -64,11 +65,12 @@ module ManageIQ
         end
 
         def request_id
-          if Thread.current[:current_request]&.request_id
-            ActiveSupport::Deprecation.warn("Usage of `Thread.current[:current_request]&.request_id` will be deprecated in version 0.5.0. Please switch to `Thread.current[:request_id]` to log request_id automatically.")
+          Thread.current[:request_id] || Thread.current[:current_request]&.request_id.tap do |request_id|
+            if request_id
+              require "active_support/deprecation"
+              ActiveSupport::Deprecation.warn("Usage of `Thread.current[:current_request]&.request_id` will be deprecated in version 0.5.0. Please switch to `Thread.current[:request_id]` to log request_id automatically.")
+            end
           end
-
-          Thread.current[:current_request]&.request_id || Thread.current[:request_id]
         end
       end
     end

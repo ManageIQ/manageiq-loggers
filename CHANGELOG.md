@@ -5,6 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.6.0] - 2020-12-09
+### Changed
+- Update rake dependency to address CVE-2020-8130 [(#19)](https://github.com/ManageIQ/manageiq-loggers/pull/19)
+
+### Fixed
+- Fix escaping of < and > in Container logger (31 minutes ago) <Jason Frey> [(#29)](https://github.com/ManageIQ/manageiq-loggers/pull/29)
+- Fix ActiveSupport::Deprecation call (35 minutes ago) <Jason Frey> [(#29)](https://github.com/ManageIQ/manageiq-loggers/pull/29)
+- Fix the handling of journald code_file/code_line [(#21)](https://github.com/ManageIQ/manageiq-loggers/pull/21) [(#22)](https://github.com/ManageIQ/manageiq-loggers/pull/22)
+
+### Added
+- Add code_func to the journald logger [(#23)](https://github.com/ManageIQ/manageiq-loggers/pull/23)
+
 ## [0.5.0] - 2020-03-18
 ### Changed
 - Deprecate Thread.current[:current_request]&.request_id in favor of Thread.current[:request_id] [(#17)](https://github.com/ManageIQ/manageiq-loggers/pull/17)
@@ -37,7 +49,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.5.0...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.6.0...master
+[0.6.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.0...v0.4.1

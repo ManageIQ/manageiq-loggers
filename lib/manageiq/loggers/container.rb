@@ -36,7 +36,7 @@ module ManageIQ
         def call(severity, time, progname, msg)
           # From https://github.com/ViaQ/elasticsearch-templates/releases -> Downloads -> *.asciidoc
           # NOTE: These values are in a specific order for easier human readbility via STDOUT
-          {
+          payload = {
             :@timestamp => format_datetime(time),
             :hostname   => hostname,
             :pid        => $PROCESS_ID,
@@ -46,7 +46,8 @@ module ManageIQ
             :message    => prefix_task_id(msg2str(msg)),
             :request_id => request_id
             # :tags => "tags string",
-          }.compact.to_json << "\n"
+          }.compact
+          JSON.generate(payload) << "\n"
         end
 
         private

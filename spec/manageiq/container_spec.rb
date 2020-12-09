@@ -53,4 +53,12 @@ describe ManageIQ::Loggers::Container::Formatter do
     expected = expected_hash(time, message)
     expect(JSON.parse(result)).to eq(expected)
   end
+
+  it "does not escape characters as in ActiveSupport::JSON extensions" do
+    require "active_support/json"
+
+    time = Time.now
+    result = described_class.new.call("INFO", time, "some_program", "xxx < yyy > zzz")
+    expect(result).to include('"message":"xxx < yyy > zzz"')
+  end
 end

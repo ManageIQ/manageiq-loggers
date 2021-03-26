@@ -7,7 +7,7 @@ require 'English'
 module ManageIQ
   module Loggers
     class Base < Logger
-      MAX_LOG_LINE_LENGTH = 1.megabyte
+      MAX_LOG_LINE_LENGTH = 8.kilobytes
 
       def initialize(*args)
         super

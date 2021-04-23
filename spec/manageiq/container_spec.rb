@@ -1,7 +1,8 @@
 require 'manageiq/loggers/container'
 
 describe ManageIQ::Loggers::Container::Formatter do
-  let(:message) { "testing 1, 2, 3" }
+  let(:message)   { "testing 1, 2, 3" }
+  let(:formatter) { described_class.new }
 
   def expected_hash(time, message, request_id = nil)
     {
@@ -16,6 +17,40 @@ describe ManageIQ::Loggers::Container::Formatter do
     }.compact
   end
 
+  it "with a message" do
+    time = Time.now
+    result = formatter.call("INFO", time, "some_program", message)
+
+    expected = expected_hash(time, message)
+    expect(JSON.parse(result)).to eq(expected)
+  end
+
+  it "with a message with Unicode characters" do
+    message = "häåğēn.däzş"
+    time = Time.now
+    result = formatter.call("INFO", time, "some_program", message)
+
+    expected = expected_hash(time, message)
+    expect(JSON.parse(result)).to eq(expected)
+  end
+
+  it "with a message with ASCII-8BIT encoding" do
+    time = Time.now
+    result = formatter.call("INFO", time, "some_program", message.dup.force_encoding("ASCII-8BIT"))
+
+    expected = expected_hash(time, message)
+    expect(JSON.parse(result)).to eq(expected)
+  end
+
+  it "with a message with ASCII-8BIT encoding and Unicode characters" do
+    message = "häåğēn.däzş"
+    time = Time.now
+    result = formatter.call("INFO", time, "some_program", message.dup.force_encoding("ASCII-8BIT"))
+
+    expected = expected_hash(time, message)
+    expect(JSON.parse(result)).to eq(expected)
+  end
+
   describe "with a request_id in thread local storage" do
     let(:request_id) { "123" }
 
@@ -25,7 +60,8 @@ describe ManageIQ::Loggers::Container::Formatter do
 
       it do
         time = Time.now
-        result = described_class.new.call("INFO", time, "some_program", message)
+        result = formatter.call("INFO", time, "some_program", message)
+
         expected = expected_hash(time, message, request_id)
         expect(JSON.parse(result)).to eq(expected)
       end
@@ -40,25 +76,20 @@ describe ManageIQ::Loggers::Container::Formatter do
         expect(ActiveSupport::Deprecation).to receive(:warn)
 
         time = Time.now
-        result = described_class.new.call("INFO", time, "some_program", message)
+        result = formatter.call("INFO", time, "some_program", message)
+
         expected = expected_hash(time, message, request_id)
         expect(JSON.parse(result)).to eq(expected)
       end
     end
   end
 
-  it "logs a message" do
-    time = Time.now
-    result = described_class.new.call("INFO", time, "some_program", message)
-    expected = expected_hash(time, message)
-    expect(JSON.parse(result)).to eq(expected)
-  end
-
   it "does not escape characters as in ActiveSupport::JSON extensions" do
     require "active_support/json"
 
     time = Time.now
-    result = described_class.new.call("INFO", time, "some_program", "xxx < yyy > zzz")
+    result = formatter.call("INFO", time, "some_program", "xxx < yyy > zzz")
+
     expect(result).to include('"message":"xxx < yyy > zzz"')
   end
 end

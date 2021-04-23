@@ -1,10 +1,41 @@
 require 'manageiq/loggers/base'
 
 describe ManageIQ::Loggers::Base do
-  describe "#log_hashes" do
-    let(:buffer) { StringIO.new }
-    let(:logger) { described_class.new(buffer) }
+  let(:buffer)  { StringIO.new }
+  let(:logger)  { described_class.new(buffer) }
+  let(:message) { "testing 1, 2, 3" }
 
+  it "logs a message" do
+    logger.info(message)
+
+    buffer.rewind
+    expect(buffer.read).to include(message)
+  end
+
+  it "logs a message with Unicode characters" do
+    message = "häåğēn.däzş"
+    result = logger.info(message)
+
+    buffer.rewind
+    expect(buffer.read).to include(message)
+  end
+
+  it "logs a message with ASCII-8BIT encoding" do
+    result = logger.info(message.dup.force_encoding("ASCII-8BIT"))
+
+    buffer.rewind
+    expect(buffer.read).to include(message)
+  end
+
+  it "logs a message with ASCII-8BIT encoding and Unicode characters" do
+    message = "häåğēn.däzş"
+    result = logger.info(message.dup.force_encoding("ASCII-8BIT"))
+
+    buffer.rewind
+    expect(buffer.read).to include(message)
+  end
+
+  describe "#log_hashes" do
     it "filters out passwords when keys are symbols" do
       hash = {:a => {:b => 1, :password => "pa$$w0rd"}}
       logger.log_hashes(hash)
@@ -82,11 +113,10 @@ b:
   end
 
   context "long messages" do
-    let(:logger) { described_class.new(@log) }
-
     it "truncates long messages when max_message_size is set" do
       msg = "a" * 10.kilobytes
       _, message = logger.formatter.call(:error, Time.now.utc, "", msg).split("-- : ")
+
       expect(message.strip.size).to eq(8.kilobytes)
     end
   end

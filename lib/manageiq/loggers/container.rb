@@ -5,12 +5,8 @@ module ManageIQ
         logdev.sync = true # Don't buffer container log output
 
         super
-        self.level = DEBUG
-        self.formatter = Formatter.new
-      end
 
-      def level=(_new_level)
-        super(DEBUG) # We want everything written to the ContainerLogger written to STDOUT
+        self.formatter = Formatter.new
       end
 
       def filename

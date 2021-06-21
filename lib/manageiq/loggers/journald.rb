@@ -1,8 +1,10 @@
 module ManageIQ
   module Loggers
     class Journald < Base
-      # An syslog identifier used when writing messages. The default is the progname.
-      attr_accessor :syslog_identifier
+      require "active_support/core_ext/module/aliasing"
+
+      # Alias syslog_identifier for backwards compatibility
+      alias_attribute :syslog_identifier, :progname
 
       # Create and return a new ManageIQ::Loggers::Journald instance. The
       # arguments to the initializer can be ignored unless you're multicasting.
@@ -15,7 +17,6 @@ module ManageIQ
         super(logdev, *args)
         @formatter = Formatter.new
         @progname ||= 'manageiq'
-        @syslog_identifier ||= @progname
       end
 
       # Comply with the VMDB::Logger interface. For a filename we simply use
@@ -49,7 +50,7 @@ module ManageIQ
         Systemd::Journal.message(
           :message           => message,
           :priority          => log_level_map[severity],
-          :syslog_identifier => syslog_identifier,
+          :syslog_identifier => progname,
           :code_line         => caller_object.lineno,
           :code_file         => caller_object.absolute_path,
           :code_func         => caller_object.label

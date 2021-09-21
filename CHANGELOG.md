@@ -5,13 +5,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.7.0] - 2021-09-21
+### Changed
+- Truncate log lines to 8Kb [(#32)](https://github.com/ManageIQ/manageiq-loggers/pull/32)
+- Honor container log level [(#35)](https://github.com/ManageIQ/manageiq-loggers/pull/35)
+- Use progname rather than syslog_identifier for journald logs [(#36)](https://github.com/ManageIQ/manageiq-loggers/pull/36)
+
+### Fixed
+- Handle Unicode characters in binary messages. [(#34)](https://github.com/ManageIQ/manageiq-loggers/pull/34)
+
 ## [0.6.0] - 2020-12-09
 ### Changed
 - Update rake dependency to address CVE-2020-8130 [(#19)](https://github.com/ManageIQ/manageiq-loggers/pull/19)
 
 ### Fixed
-- Fix escaping of < and > in Container logger (31 minutes ago) <Jason Frey> [(#29)](https://github.com/ManageIQ/manageiq-loggers/pull/29)
-- Fix ActiveSupport::Deprecation call (35 minutes ago) <Jason Frey> [(#29)](https://github.com/ManageIQ/manageiq-loggers/pull/29)
+- Fix escaping of < and > in Container logger [(#29)](https://github.com/ManageIQ/manageiq-loggers/pull/29)
+- Fix ActiveSupport::Deprecation call [(#29)](https://github.com/ManageIQ/manageiq-loggers/pull/29)
 - Fix the handling of journald code_file/code_line [(#21)](https://github.com/ManageIQ/manageiq-loggers/pull/21) [(#22)](https://github.com/ManageIQ/manageiq-loggers/pull/22)
 
 ### Added
@@ -49,7 +58,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.6.0...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.7.0...master
+[0.7.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.4.1...v0.4.2

@@ -1,11 +1,6 @@
 module ManageIQ
   module Loggers
     class Journald < Base
-      require "active_support/core_ext/module/aliasing"
-
-      # Alias syslog_identifier for backwards compatibility
-      alias_attribute :syslog_identifier, :progname
-
       # Create and return a new ManageIQ::Loggers::Journald instance. The
       # arguments to the initializer can be ignored unless you're multicasting.
       #

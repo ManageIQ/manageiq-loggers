@@ -1,6 +1,6 @@
 # ManageIQ::Loggers
 
-[![Build Status](https://travis-ci.org/ManageIQ/manageiq-loggers.svg)](https://travis-ci.org/ManageIQ/manageiq-loggers)
+[![Build Status](https://app.travis-ci.com/ManageIQ/manageiq-loggers.svg?branch=master)](https://app.travis-ci.com/ManageIQ/manageiq-loggers)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8d3c9bf77c45a024166b/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-loggers/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8d3c9bf77c45a024166b/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-loggers/test_coverage)
 [![Security](https://hakiri.io/github/ManageIQ/manageiq-loggers/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-loggers/master)

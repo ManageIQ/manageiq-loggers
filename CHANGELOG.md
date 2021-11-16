@@ -5,11 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [0.8.0] - 2021-11-15
+## [1.0.0] - 2021-11-16
+### Removed
+- **BREAKING** Remove support for Ruby 2.4 and 2.5 [(#40)](https://github.com/ManageIQ/manageiq-loggers/pull/40)
 
+### Fixed
+- Fixed Ruby 3 support with kwargs [(#40)](https://github.com/ManageIQ/manageiq-loggers/pull/40)
+
+## [0.8.0] - 2021-11-15
 ### Changed
-- Add Ruby 2.6, 2.7, and 3.0 to the test matrix
-- Add ability to set class-level and instance-level filters for log_hashes
+- Add Ruby 2.6, 2.7, and 3.0 support [(#38)](https://github.com/ManageIQ/manageiq-loggers/pull/38)
+- Add ability to set class-level and instance-level filters for log_hashes [(#38)](https://github.com/ManageIQ/manageiq-loggers/pull/38)
 
 ## [0.7.0] - 2021-09-21
 ### Changed
@@ -64,7 +70,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.8.0...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.0...master
+[0.8.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.8.0...v1.0.0
 [0.8.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.5.0...v0.6.0

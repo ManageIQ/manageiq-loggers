@@ -1,5 +1,3 @@
-require 'manageiq/loggers/journald'
-
 RSpec.describe ManageIQ::Loggers::Journald, :linux do
   let(:logger) { described_class.new }
 

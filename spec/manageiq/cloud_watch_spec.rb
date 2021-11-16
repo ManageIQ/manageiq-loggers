@@ -1,5 +1,4 @@
 require 'cloudwatchlogger'
-require 'manageiq/loggers/cloud_watch'
 
 describe ManageIQ::Loggers::CloudWatch do
   it "unconfigured returns a Container logger" do

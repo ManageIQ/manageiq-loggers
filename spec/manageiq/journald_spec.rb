@@ -1,16 +1,19 @@
-require 'manageiq/loggers/journald'
-
 RSpec.describe ManageIQ::Loggers::Journald, :linux do
   let(:logger) { described_class.new }
 
   context "progname" do
-    it "has a progname accessor" do
-      expect(logger).to respond_to(:progname)
-      expect(logger).to respond_to(:progname=)
+    it "sets the progname to manageiq by default" do
+      expect(logger.progname).to eq("manageiq")
     end
 
-    it "sets the progname to manageiq by default" do
-      expect(logger.progname).to eql('manageiq')
+    it "allows progname overrides" do
+      logger.progname = "manageiq-test"
+      expect(logger.progname).to eq("manageiq-test")
+    end
+
+    it "allows progname overrides on instantiation" do
+      logger = described_class.new(nil, :progname => "manageiq-test")
+      expect(logger.progname).to eq("manageiq-test")
     end
   end
 

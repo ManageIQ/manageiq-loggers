@@ -3,8 +3,6 @@ language: ruby
 dist: bionic
 cache: bundler
 rvm:
-- 2.4.10
-- 2.5.9
 - 2.6.8
 - 2.7.4
 - 3.0.2

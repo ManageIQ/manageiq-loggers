@@ -1,5 +1,3 @@
-require 'manageiq/loggers/container'
-
 describe ManageIQ::Loggers::Container::Formatter do
   let(:message)   { "testing 1, 2, 3" }
   let(:formatter) { described_class.new }

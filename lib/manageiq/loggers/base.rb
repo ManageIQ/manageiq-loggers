@@ -9,7 +9,7 @@ module ManageIQ
     class Base < Logger
       MAX_LOG_LINE_LENGTH = 8.kilobytes
 
-      def initialize(*args)
+      def initialize(*_, **_)
         super
         self.level = INFO
 

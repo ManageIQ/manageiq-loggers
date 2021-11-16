@@ -1,10 +1,14 @@
+require "active_support/core_ext/module/aliasing"
+require "active_support/deprecation"
+
 module ManageIQ
   module Loggers
     class Journald < Base
-      require "active_support/core_ext/module/aliasing"
-
-      # Alias syslog_identifier for backwards compatibility
       alias_attribute :syslog_identifier, :progname
+      ActiveSupport::Deprecation.new('v1.0', 'manageiq-loggers').deprecate_methods(self,
+        :syslog_identifier  => :progname,
+        :syslog_identifier= => :progname=,
+      )
 
       # Create and return a new ManageIQ::Loggers::Journald instance. The
       # arguments to the initializer can be ignored unless you're multicasting.

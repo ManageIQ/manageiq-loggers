@@ -72,13 +72,24 @@ module ManageIQ
         end
       end
 
+      private_class_method def self.clean_log_hashes_filter(filters)
+        (Array(filters).compact.map(&:to_s) << "password").uniq
+      end
+
+      def self.log_hashes_filter
+        @log_hashes_filter ||= ["password"]
+      end
+
+      def self.log_hashes_filter=(filters)
+        @log_hashes_filter = clean_log_hashes_filter(filters)
+      end
+
       def self.log_hashes(logger, h, options = {})
         require 'yaml'
         require 'manageiq/password'
 
         level  = options[:log_level] || :info
-        filter = Array(options[:filter]).flatten.compact.map(&:to_s) << "password"
-        filter.uniq!
+        filter = options[:filter] ? clean_log_hashes_filter(options[:filter]) : log_hashes_filter
 
         values = YAML.dump(h.to_hash).gsub(ManageIQ::Password::REGEXP, "[FILTERED]")
         values = values.split("\n").map do |l|
@@ -91,7 +102,16 @@ module ManageIQ
         logger.send(level, "\n#{values}")
       end
 
+      def log_hashes_filter
+        @log_hashes_filter || self.class.log_hashes_filter
+      end
+
+      def log_hashes_filter=(filters)
+        @log_hashes_filter = self.class.send(:clean_log_hashes_filter, filters)
+      end
+
       def log_hashes(h, options = {})
+        options[:filter] ||= log_hashes_filter
         self.class.log_hashes(self, h, options)
       end
 

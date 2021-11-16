@@ -7,9 +7,9 @@ module ManageIQ
       # Internally we set our own formatter, and automatically set the
       # progname option to 'manageiq' if not specified.
       #
-      def initialize(logdev = nil, *args)
+      def initialize(_logdev = nil, *_, **_)
         require "systemd-journal"
-        super(logdev, *args)
+        super
         @formatter = Formatter.new
         @progname ||= 'manageiq'
       end

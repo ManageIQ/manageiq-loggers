@@ -5,6 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.1] - 2021-01-05
+### Fixed
+- Fix require issue when used with Rails 7 [(#42)](https://github.com/ManageIQ/manageiq-loggers/pull/42)
+- Check if the global is defined before trying to use it for Ruby 3 support [(#41)](https://github.com/ManageIQ/manageiq-loggers/pull/41)
+
 ## [1.0.0] - 2021-11-16
 ### Removed
 - **BREAKING** Remove support for Ruby 2.4 and 2.5 [(#40)](https://github.com/ManageIQ/manageiq-loggers/pull/40)
@@ -70,8 +75,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.0...master
-[0.8.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.8.0...v1.0.0
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.1...master
+[1.0.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.8.0...v1.0.0
 [0.8.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.5.0...v0.6.0

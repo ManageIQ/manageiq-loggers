@@ -1,4 +1,5 @@
 require 'logger'
+require 'active_support'
 require 'active_support/core_ext/object/try'
 require 'active_support/core_ext/numeric/bytes'
 require 'active_support/core_ext/string'

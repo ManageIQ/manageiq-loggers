@@ -235,6 +235,7 @@ describe ManageIQ::Loggers::Base do
     end
 
     it "handles logging hash-like classes" do
+      require "active_support"
       require "active_support/core_ext/hash"
       hash = ActiveSupport::HashWithIndifferentAccess.new(:a => 1, :b => {:c => 3})
 

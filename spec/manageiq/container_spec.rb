@@ -1,3 +1,7 @@
+require "active_support"
+require "active_support/deprecation"
+require "active_support/json"
+
 describe ManageIQ::Loggers::Container::Formatter do
   let(:message)   { "testing 1, 2, 3" }
   let(:formatter) { described_class.new }
@@ -70,7 +74,6 @@ describe ManageIQ::Loggers::Container::Formatter do
       after  { Thread.current[:current_request] = nil }
 
       it do
-        require "active_support/deprecation"
         expect(ActiveSupport::Deprecation).to receive(:warn)
 
         time = Time.now
@@ -83,8 +86,6 @@ describe ManageIQ::Loggers::Container::Formatter do
   end
 
   it "does not escape characters as in ActiveSupport::JSON extensions" do
-    require "active_support/json"
-
     time = Time.now
     result = formatter.call("INFO", time, "some_program", "xxx < yyy > zzz")
 

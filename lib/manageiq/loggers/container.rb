@@ -53,6 +53,10 @@ module ManageIQ
 
         private
 
+        def format_datetime(*)
+          super.rstrip
+        end
+
         def hostname
           @hostname ||= ENV["HOSTNAME"]
         end

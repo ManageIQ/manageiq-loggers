@@ -8,7 +8,7 @@ describe ManageIQ::Loggers::Container::Formatter do
 
   def expected_hash(time, message, request_id = nil)
     {
-      "@timestamp" => time.strftime("%Y-%m-%dT%H:%M:%S.%6N "),
+      "@timestamp" => time.strftime("%Y-%m-%dT%H:%M:%S.%6N"),
       "hostname"   => ENV["HOSTNAME"],
       "level"      => "info",
       "message"    => message,

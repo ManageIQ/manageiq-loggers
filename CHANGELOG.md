@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2022-11-14
+### Changed
+- Split out JSON logger from Container logger [(#49)](https://github.com/ManageIQ/manageiq-loggers/pull/49)
+- Allow passing the CloudWatch logger's configuration as kwargs [(#50)](https://github.com/ManageIQ/manageiq-loggers/pull/50)
+
+### Fixed
+- Remove timestamp whitespace in container logger formatter [(#47)](https://github.com/ManageIQ/manageiq-loggers/pull/47)
+
 ## [1.0.1] - 2021-01-05
 ### Fixed
 - Fix require issue when used with Rails 7 [(#42)](https://github.com/ManageIQ/manageiq-loggers/pull/42)
@@ -75,7 +83,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.1...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.0...master
+[1.1.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.8.0...v1.0.0
 [0.8.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.7.0...v0.8.0

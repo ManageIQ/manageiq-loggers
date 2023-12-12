@@ -39,7 +39,7 @@ module ManageIQ
           end
         end
 
-        message = formatter.call(format_severity(severity), progname, message)
+        message = formatter.call(format_severity(severity), nil, progname, message)
         caller_object = caller_locations(3, 1).first
 
         Systemd::Journal.message(
@@ -69,7 +69,7 @@ module ManageIQ
       end
 
       class Formatter < Base::Formatter
-        def call(severity, progname, msg)
+        def call(severity, _time, progname, msg)
           msg = prefix_task_id(msg2str(msg)).truncate(Base::MAX_LOG_LINE_LENGTH)
           "%5s -- %s: %s\n" % [severity, progname, msg]
         end

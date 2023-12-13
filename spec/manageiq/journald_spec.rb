@@ -19,8 +19,7 @@ RSpec.describe ManageIQ::Loggers::Journald, :linux do
 
   context "code_file" do
     it "sets the code_file" do
-      log = Logger.new(IO::NULL)
-      log.extend(ActiveSupport::Logger.broadcast(logger))
+      log = logger.wrap(Logger.new(IO::NULL))
 
       expect(Systemd::Journal).to receive(:message).with(hash_including(:code_file => __FILE__, :code_line => __LINE__ + 1))
       log.info("abcd") # NOTE this has to be exactly beneath the exect for the __LINE__ + 1 to work

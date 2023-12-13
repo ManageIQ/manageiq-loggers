@@ -5,6 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.1] - 2023-12-13
+### Fixed
+- Fix Journald::Formatter's arguments list [(#61)](https://github.com/ManageIQ/manageiq-loggers/pull/61)
+- Fix missing ActiveSupport::Logger.broadcast [(#62)](https://github.com/ManageIQ/manageiq-loggers/pull/62)
+
+### Changed
+- Update actions/checkout version to v4 [(#60)](https://github.com/ManageIQ/manageiq-loggers/pull/60)
+- Update GitHub Actions versions [(#59)](https://github.com/ManageIQ/manageiq-loggers/pull/59)
+
 ## [1.1.0] - 2022-11-14
 ### Changed
 - Split out JSON logger from Container logger [(#49)](https://github.com/ManageIQ/manageiq-loggers/pull/49)
@@ -83,7 +92,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.0...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.1...master
+[1.1.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v0.8.0...v1.0.0

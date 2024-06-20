@@ -10,6 +10,19 @@ module ManageIQ
     class Base < Logger
       MAX_LOG_LINE_LENGTH = 8.kilobytes
 
+      class << self
+        def wrap(loggers)
+          if ActiveSupport.gem_version >= Gem::Version.new("7.1.0")
+            require 'active_support/broadcast_logger'
+            ActiveSupport::BroadcastLogger.new(*loggers)
+          else
+            logger = loggers.shift
+            loggers.each { |wrapped_logger| logger.extend(ActiveSupport::Logger.broadcast(wrapped_logger)) }
+            logger
+          end
+        end
+      end
+
       def initialize(*_, **_)
         super
         self.level = INFO
@@ -26,6 +39,11 @@ module ManageIQ
         # provided by ActiveSupport::LoggerThreadSafeLevel
         @write_lock   = Mutex.new
         @local_levels = {}
+      end
+
+      def wrap(loggers)
+        loggers = [loggers] unless loggers.kind_of?(Array)
+        self.class.wrap(loggers.unshift(self))
       end
 
       # Silences the logger for the duration of the block.

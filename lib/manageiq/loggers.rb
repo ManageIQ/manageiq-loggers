@@ -6,3 +6,11 @@ require "manageiq/loggers/container"
 require "manageiq/loggers/journald"
 
 require "manageiq/loggers/version"
+
+module ManageIQ
+  module Loggers
+    def self.deprecator
+      @deprecator ||= ActiveSupport::Deprecation.new(VERSION, "ManageIQ::Loggers")
+    end
+  end
+end

@@ -74,7 +74,7 @@ describe ManageIQ::Loggers::JSONLogger::Formatter do
       after  { Thread.current[:current_request] = nil }
 
       it do
-        expect(ActiveSupport::Deprecation).to receive(:warn)
+        expect(ManageIQ::Loggers.deprecator).to receive(:warn)
 
         time = Time.now
         result = formatter.call("INFO", time, "some_program", message)

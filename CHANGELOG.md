@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.0] - 2024-09-30
+### Added
+- Test with ruby 3.1 and 3.0 [(#65)](https://github.com/ManageIQ/manageiq-loggers/pull/65)
+- Add ActiveSupport versions into the test matrix [(#77)](https://github.com/ManageIQ/manageiq-loggers/pull/77)
+- Add a wrap method to support BroadcastLogger [(#63)](https://github.com/ManageIQ/manageiq-loggers/pull/63)
+
 ## [1.1.1] - 2023-12-13
 ### Fixed
 - Fix Journald::Formatter's arguments list [(#61)](https://github.com/ManageIQ/manageiq-loggers/pull/61)
@@ -92,7 +98,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.1...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.2.0...master
+[1.2.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.0...v1.0.1

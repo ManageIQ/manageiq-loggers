@@ -1,5 +1,5 @@
 require 'active_support'
-require 'active_support/core_ext/string'
+require 'active_support/core_ext/object'
 require 'active_support/logger'
 
 module ManageIQ
@@ -20,7 +20,8 @@ module ManageIQ
 
         creds = {:access_key_id => access_key_id, :secret_access_key => secret_access_key}
         cloud_watch_logdev = CloudWatchLogger::Client.new(creds, log_group, log_stream)
-        super(cloud_watch_logdev).tap { |logger| logger.extend(ActiveSupport::Logger.broadcast(container_logger)) }
+        cloud_watch_logger = super(cloud_watch_logdev)
+        cloud_watch_logger.wrap(container_logger)
       end
 
       def initialize(logdev, *args)

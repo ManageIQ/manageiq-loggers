@@ -40,7 +40,13 @@ module ManageIQ
         end
 
         message = formatter.call(format_severity(severity), nil, progname, message)
-        caller_object = caller_locations(3, 1).first
+
+        # The call stack is different depending on if we are using the newer
+        # ActiveSupport::BroadcastLogger or the older ActiveSupport::Logger.broadcast
+        # so we have to account for that difference when walking up the caller_locations
+        # to get the "real" logging location.
+        callstack_start = ActiveSupport.gem_version >= Gem::Version.new("7.1.0") ? 7 : 3
+        caller_object = caller_locations(callstack_start, 1).first
 
         Systemd::Journal.message(
           :message           => message,

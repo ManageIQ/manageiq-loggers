@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- **BREAKING** Drop automatic broadcast of Cloudwatch to Container logger [(#79)](https://github.com/ManageIQ/manageiq-loggers/pull/79)
 
 ## [1.2.0] - 2024-09-30
 ### Added

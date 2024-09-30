@@ -1,8 +1,10 @@
 require 'cloudwatchlogger'
 
 describe ManageIQ::Loggers::CloudWatch do
-  it "unconfigured returns a Container logger" do
-    expect(described_class.new).to be_kind_of(ManageIQ::Loggers::Container)
+  let(:cloud_watch_logdev) { double("CloudWatchLogger::Client::AWS_SDK::DeliveryThreadManager") }
+
+  it "raises an exception if cloudwatch parameters are missing" do
+    expect { described_class.new }.to raise_error(ArgumentError, /Required parameters: access_key_id, secret_access_key, log_group, log_stream/)
   end
 
   context "configured via env" do
@@ -22,15 +24,13 @@ describe ManageIQ::Loggers::CloudWatch do
     end
 
     before do
-      expect(CloudWatchLogger::Client::AWS_SDK::DeliveryThreadManager).to receive(:new).and_return(double("CloudWatchLogger::Client::AWS_SDK::DeliveryThreadManager", :deliver => nil))
+      expect(CloudWatchLogger::Client::AWS_SDK::DeliveryThreadManager)
+        .to receive(:new)
+        .and_return(cloud_watch_logdev)
     end
 
-    it "the Container logger also receives the same messages" do
-      container_logger = ManageIQ::Loggers::Container.new
-      expect(ManageIQ::Loggers::Container).to receive(:new).and_return(container_logger)
-
-      expect(container_logger).to receive(:add).with(1, nil, "Testing 1,2,3")
-
+    it "calls deliver on the CloudWatch logger" do
+      expect(cloud_watch_logdev).to receive(:deliver).with(a_string_matching("\"level\":\"info\",\"message\":\"Testing 1,2,3\""))
       described_class.new.info("Testing 1,2,3")
     end
   end
@@ -46,15 +46,13 @@ describe ManageIQ::Loggers::CloudWatch do
     end
 
     before do
-      expect(CloudWatchLogger::Client::AWS_SDK::DeliveryThreadManager).to receive(:new).and_return(double("CloudWatchLogger::Client::AWS_SDK::DeliveryThreadManager", :deliver => nil))
+      expect(CloudWatchLogger::Client::AWS_SDK::DeliveryThreadManager)
+        .to receive(:new)
+        .and_return(cloud_watch_logdev)
     end
 
-    it "the Container logger also receives the same messages" do
-      container_logger = ManageIQ::Loggers::Container.new
-      expect(ManageIQ::Loggers::Container).to receive(:new).and_return(container_logger)
-
-      expect(container_logger).to receive(:add).with(1, nil, "Testing 1,2,3")
-
+    it "calls deliver on the CloudWatch logger" do
+      expect(cloud_watch_logdev).to receive(:deliver).with(a_string_matching("\"level\":\"info\",\"message\":\"Testing 1,2,3\""))
       described_class.new(**params).info("Testing 1,2,3")
     end
   end

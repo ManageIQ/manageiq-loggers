@@ -13,15 +13,13 @@ module ManageIQ
         log_group         ||= ENV["CLOUD_WATCH_LOG_GROUP"].presence
         log_stream        ||= ENV["HOSTNAME"].presence
 
-        container_logger = ManageIQ::Loggers::Container.new
-        return container_logger unless access_key_id && secret_access_key && log_group && log_stream
+        raise ArgumentError, "Required parameters: access_key_id, secret_access_key, log_group, log_stream" unless access_key_id && secret_access_key && log_group && log_stream
 
         require 'cloudwatchlogger'
 
         creds = {:access_key_id => access_key_id, :secret_access_key => secret_access_key}
         cloud_watch_logdev = CloudWatchLogger::Client.new(creds, log_group, log_stream)
-        cloud_watch_logger = super(cloud_watch_logdev)
-        cloud_watch_logger.wrap(container_logger)
+        super(cloud_watch_logdev)
       end
 
       def initialize(logdev, *args)

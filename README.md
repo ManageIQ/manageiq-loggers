@@ -28,8 +28,6 @@ Some loggers require additional gems to function correctly. These gems are not s
 
 To use the `Journald` logger, users must specify the `systemd-journal` gem as a dependency
 
-To use the `CloudWatch` logger, users must specify the `cloudwatchlogger` gem as a dependency
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

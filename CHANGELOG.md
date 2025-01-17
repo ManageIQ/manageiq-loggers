@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Removed
+- **BREAKING** Remove the deprecated `current_request.request_id` [(#80)](https://github.com/ManageIQ/manageiq-loggers/pull/80)
 
 ### Removed
 - **BREAKING** Remove the Cloudwatch Logger [(#81)](https://github.com/ManageIQ/manageiq-loggers/pull/81)

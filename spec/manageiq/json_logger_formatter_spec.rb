@@ -68,21 +68,6 @@ describe ManageIQ::Loggers::JSONLogger::Formatter do
         expect(JSON.parse(result)).to eq(expected)
       end
     end
-
-    context "in deprecated :current_request" do
-      before { Thread.current[:current_request] = double(:request_id => request_id) }
-      after  { Thread.current[:current_request] = nil }
-
-      it do
-        expect(ActiveSupport::Deprecation).to receive(:warn)
-
-        time = Time.now
-        result = formatter.call("INFO", time, "some_program", message)
-
-        expected = expected_hash(time, message, request_id)
-        expect(JSON.parse(result)).to eq(expected)
-      end
-    end
   end
 
   it "does not escape characters as in ActiveSupport::JSON extensions" do

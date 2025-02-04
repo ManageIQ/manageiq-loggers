@@ -1,7 +1,7 @@
 module ManageIQ
   module Loggers
     class JSONLogger < Base
-     def initialize(*_, **_)
+     def initialize(_logdev = nil, *_, **_)
         super
         self.formatter = Formatter.new
       end

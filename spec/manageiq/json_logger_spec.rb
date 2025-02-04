@@ -3,6 +3,10 @@ describe ManageIQ::Loggers::JSONLogger do
   let(:logger)  { described_class.new(buffer) }
   let(:message) { "testing 1, 2, 3" }
 
+  it "provides nil default log device" do
+    expect(described_class.new.logdev).to eq nil
+  end
+
   it "logs a message in JSON format" do
     logger.info(message)
 

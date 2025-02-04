@@ -23,7 +23,7 @@ module ManageIQ
         end
       end
 
-      def initialize(*_, **_)
+      def initialize(_logdev = nil, *_, **_)
         super
         self.level = INFO
 

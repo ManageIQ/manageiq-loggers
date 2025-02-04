@@ -1,6 +1,10 @@
 RSpec.describe ManageIQ::Loggers::Journald, :linux do
   let(:logger) { described_class.new }
 
+  it "provides nil default log device" do
+    expect(described_class.new.logdev).to eq nil
+  end
+
   context "progname" do
     it "sets the progname to manageiq by default" do
       expect(logger.progname).to eq("manageiq")

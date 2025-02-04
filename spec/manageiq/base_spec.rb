@@ -10,6 +10,10 @@ describe ManageIQ::Loggers::Base do
     described_class.instance_variable_set("@log_hashes_filter", nil)
   end
 
+  it "provides nil default log device" do
+    expect(described_class.new.logdev).to eq nil
+  end
+
   it "logs a message" do
     logger.info(message)
 

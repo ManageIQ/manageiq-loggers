@@ -25,7 +25,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "manageiq-password", "< 2"
 
   spec.add_development_dependency "bundler"
-  spec.add_development_dependency "manageiq-style", ">= 1.5.2"
+  spec.add_development_dependency "manageiq-style", ">= 1.5.4"
+
   spec.add_development_dependency "rake", ">= 12.3.3"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "simplecov", ">= 0.21.2"

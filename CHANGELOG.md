@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.1] - 2025-05-21
 ### Fixed
 - Handle nil caller_object in Journald logger [(#91)](https://github.com/ManageIQ/manageiq-loggers/pull/91)
 
@@ -101,7 +102,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.2.0...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.2.1...v1.2.z
+[1.2.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.0.1...v1.1.0

@@ -46,15 +46,15 @@ module ManageIQ
         # so we have to account for that difference when walking up the caller_locations
         # to get the "real" logging location.
         callstack_start = ActiveSupport.gem_version >= Gem::Version.new("7.1.0") ? 7 : 3
-        caller_object = caller_locations(callstack_start, 1).first
+        caller_object = caller_locations(callstack_start, 1)&.first
 
         Systemd::Journal.message(
           :message           => message,
           :priority          => log_level_map[severity],
           :syslog_identifier => progname,
-          :code_line         => caller_object.lineno,
-          :code_file         => caller_object.absolute_path,
-          :code_func         => caller_object.label
+          :code_line         => caller_object&.lineno,
+          :code_file         => caller_object&.absolute_path,
+          :code_func         => caller_object&.label
         )
       end
 

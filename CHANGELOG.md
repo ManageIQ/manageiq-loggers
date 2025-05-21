@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- Handle nil caller_object in Journald logger [(#91)](https://github.com/ManageIQ/manageiq-loggers/pull/91)
+
 ## [1.2.0] - 2024-09-30
 ### Added
 - Test with ruby 3.1 and 3.0 [(#65)](https://github.com/ManageIQ/manageiq-loggers/pull/65)

@@ -45,8 +45,11 @@ module ManageIQ
         # ActiveSupport::BroadcastLogger or the older ActiveSupport::Logger.broadcast
         # so we have to account for that difference when walking up the caller_locations
         # to get the "real" logging location.
-        callstack_start = ActiveSupport.gem_version >= Gem::Version.new("7.1.0") ? 7 : 3
-        caller_object = caller_locations(callstack_start, 1)&.first
+        caller_object = caller_locations.detect do |caller_loc|
+          next if caller_loc.path.end_with?("lib/active_support/broadcast_logger.rb", "lib/active_support/logger.rb", "/logger.rb")
+
+          caller_loc
+        end
 
         Systemd::Journal.message(
           :message           => message,

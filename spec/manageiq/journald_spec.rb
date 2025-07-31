@@ -1,7 +1,5 @@
 RSpec.describe ManageIQ::Loggers::Journald, :linux do
-  require "systemd-journal"
-
-  let(:logger) { described_class.new }
+  let!(:logger) { described_class.new }
 
   context "progname" do
     it "sets the progname to manageiq by default" do

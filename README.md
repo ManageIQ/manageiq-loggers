@@ -1,8 +1,6 @@
 # ManageIQ::Loggers
 
 [![CI](https://github.com/ManageIQ/manageiq-loggers/actions/workflows/ci.yaml/badge.svg)](https://github.com/ManageIQ/manageiq-loggers/actions/workflows/ci.yaml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/8d3c9bf77c45a024166b/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-loggers/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/8d3c9bf77c45a024166b/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-loggers/test_coverage)
 
 Loggers for ManageIQ projects
 

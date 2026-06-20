@@ -56,6 +56,14 @@ RSpec.describe ManageIQ::Loggers::Journald, :linux do
       ]
     end
 
+    around do |example|
+      original_tz = ENV['TZ']
+      ENV['TZ'] = 'EST5EDT'
+      example.run
+    ensure
+      ENV['TZ'] = original_tz
+    end
+
     before do
       allow(Systemd::Journal).to receive(:open).and_yield(journal)
       allow(journal).to receive(:filter)
@@ -81,9 +89,9 @@ RSpec.describe ManageIQ::Loggers::Journald, :linux do
 
       result = logger.contents
       expected = [
-         "[2024-05-06T08:53:20.000000 #123]  INFO -- manageiq: Line 1\n",
-         "[2024-05-06T08:53:21.000000 #456]  WARN -- manageiq: Line 2\n",
-         "[2024-05-06T08:53:22.000000 #789] ERROR -- manageiq: Line 3\n"
+         "[2024-05-06T08:53:20.000000-04:00 #123]  INFO -- manageiq: Line 1\n",
+         "[2024-05-06T08:53:21.000000-04:00 #456]  WARN -- manageiq: Line 2\n",
+         "[2024-05-06T08:53:22.000000-04:00 #789] ERROR -- manageiq: Line 3\n"
        ]
 
       expect(result).to eq(expected)

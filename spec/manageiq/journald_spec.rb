@@ -1,5 +1,11 @@
-RSpec.describe ManageIQ::Loggers::Journald, :linux do
-  let!(:logger) { described_class.new }
+RSpec.describe ManageIQ::Loggers::Journald do
+  let!(:logger) do
+    described_class.new
+  rescue LoadError
+    raise if RbConfig::CONFIG['host_os'].match?(/linux/i) # We expect this to be available on linux, so raise
+
+    skip "systemd-journal is not available on this system (#{RbConfig::CONFIG['host_os']})"
+  end
 
   context "progname" do
     it "sets the progname to manageiq by default" do

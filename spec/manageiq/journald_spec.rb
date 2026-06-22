@@ -62,14 +62,6 @@ RSpec.describe ManageIQ::Loggers::Journald do
       ]
     end
 
-    around do |example|
-      original_tz = ENV['TZ']
-      ENV['TZ'] = 'EST5EDT'
-      example.run
-    ensure
-      ENV['TZ'] = original_tz
-    end
-
     before do
       allow(Systemd::Journal).to receive(:open).and_yield(journal)
       allow(journal).to receive(:filter)
@@ -93,7 +85,7 @@ RSpec.describe ManageIQ::Loggers::Journald do
       end
       allow(journal).to receive(:current_entry) { current_entry }
 
-      result = logger.contents
+      result = Time.use_zone("Eastern Time (US & Canada)") { logger.contents }
       expected = [
          "[2024-05-06T08:53:20.000000-04:00 #123]  INFO -- manageiq: Line 1\n",
          "[2024-05-06T08:53:21.000000-04:00 #456]  WARN -- manageiq: Line 2\n",

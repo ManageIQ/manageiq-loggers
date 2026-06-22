@@ -73,7 +73,7 @@ module ManageIQ
             entry = journal.current_entry
             # This is the time in microseconds since the epoch UTC, formatted as a decimal string.
             seconds_since_epoch = entry._source_realtime_timestamp.to_f / 1_000_000.0
-            timestamp = Time.at(seconds_since_epoch).iso8601(6)
+            timestamp = Time.at(seconds_since_epoch).in_time_zone.iso8601(6)
 
             results << "[#{timestamp} ##{entry._pid}] #{entry.message}"
           end

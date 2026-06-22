@@ -14,10 +14,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
-
-  if RbConfig::CONFIG["host_os"] !~ /linux/
-    config.filter_run_excluding(:linux => true)
-  end
 end
 
 require "active_support"

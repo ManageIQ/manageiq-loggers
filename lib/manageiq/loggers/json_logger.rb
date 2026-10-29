@@ -37,10 +37,10 @@ module ManageIQ
             # :tags => "tags string",
           }.compact
           JSON.generate(payload) << "\n"
-        rescue Encoding::UndefinedConversionError
+        rescue Encoding::UndefinedConversionError, JSON::GeneratorError
           raise unless msg.encoding == Encoding::ASCII_8BIT
 
-          msg.force_encoding("UTF-8")
+          msg = msg.dup.force_encoding("UTF-8")
           retry
         end
 

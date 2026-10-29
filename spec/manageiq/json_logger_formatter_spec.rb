@@ -53,6 +53,15 @@ describe ManageIQ::Loggers::JSONLogger::Formatter do
     expect(JSON.parse(result)).to eq(expected)
   end
 
+  it "with a frozen message with ASCII-8BIT encoding and Unicode characters" do
+    message = "häåğēn.däzş"
+    time = Time.now
+    result = formatter.call("INFO", time, "some_program", message.dup.force_encoding("ASCII-8BIT").freeze)
+
+    expected = expected_hash(time, message)
+    expect(JSON.parse(result)).to eq(expected)
+  end
+
   describe "with a request_id in thread local storage" do
     let(:request_id) { "123" }
 

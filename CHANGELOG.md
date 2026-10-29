@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Update the minimum ruby version to 3.2 [(#142)](https://github.com/ManageIQ/manageiq-loggers/pull/142)
 
+### Fixed
+- Fix JSON v3 unicode conversion [(#143)](https://github.com/ManageIQ/manageiq-loggers/pull/143)
+
 ## [2.0.0] - 2026-05-19
 ### Removed
 - **BREAKING** Remove the deprecated `current_request.request_id` [(#80)](https://github.com/ManageIQ/manageiq-loggers/pull/80)

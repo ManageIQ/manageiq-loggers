@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Update the minimum ruby version to 3.2 [(#142)](https://github.com/ManageIQ/manageiq-loggers/pull/142)
 
 ## [2.0.0] - 2026-05-19
 ### Removed

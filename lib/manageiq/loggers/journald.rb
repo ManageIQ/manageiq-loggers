@@ -67,7 +67,8 @@ module ManageIQ
           journal.seek(:tail)
 
           results = []
-          max_count.times do
+          loop do
+            break if max_count && results.size >= max_count
             break unless journal.move_previous
 
             entry = journal.current_entry

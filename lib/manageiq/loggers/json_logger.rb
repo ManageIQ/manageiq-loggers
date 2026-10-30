@@ -25,6 +25,9 @@ module ManageIQ
         def call(severity, time, progname, msg)
           # From https://github.com/ViaQ/elasticsearch-templates/releases -> Downloads -> *.asciidoc
           # NOTE: These values are in a specific order for easier human readbility via STDOUT
+          message = prefix_task_id(msg2str(msg))
+          message = message.force_encoding("UTF-8") if message.encoding == Encoding::ASCII_8BIT
+
           payload = {
             :@timestamp => format_datetime(time),
             :hostname   => hostname,
@@ -32,7 +35,7 @@ module ManageIQ
             :tid        => thread_id,
             :service    => progname,
             :level      => translate_error(severity),
-            :message    => prefix_task_id(msg2str(msg)),
+            :message    => message,
             :request_id => request_id
             # :tags => "tags string",
           }.compact

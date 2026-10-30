@@ -132,5 +132,19 @@ RSpec.describe ManageIQ::Loggers::Journald do
 
       expect(logger.contents).to eq([])
     end
+
+    it "returns all entries when max_count is nil" do
+      current_entry = nil
+      available_entries = entries.dup
+      allow(journal).to receive(:move_previous) do
+        current_entry = available_entries.pop
+        !current_entry.nil?
+      end
+      allow(journal).to receive(:current_entry) { current_entry }
+
+      result = logger.contents(nil)
+
+      expect(result.size).to eq(3)
+    end
   end
 end

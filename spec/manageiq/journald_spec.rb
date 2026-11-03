@@ -44,20 +44,17 @@ RSpec.describe ManageIQ::Loggers::Journald do
 
     let(:entries) do
       [
-        double(
-          :_source_realtime_timestamp => "1715000000000000",
-          :_pid                       => 123,
-          :message                    => " INFO -- manageiq: Line 1\n"
+        Systemd::JournalEntry.new(
+          {"_PID" => "123", "MESSAGE" => " INFO -- manageiq: Line 1\n"},
+          :realtime_ts => 1_715_000_000_000_000
         ),
-        double(
-          :_source_realtime_timestamp => "1715000001000000",
-          :_pid                       => 456,
-          :message                    => " WARN -- manageiq: Line 2\n"
+        Systemd::JournalEntry.new(
+          {"_PID" => "456", "MESSAGE" => " WARN -- manageiq: Line 2\n"},
+          :realtime_ts => 1_715_000_001_000_000
         ),
-        double(
-          :_source_realtime_timestamp => "1715000002000000",
-          :_pid                       => 789,
-          :message                    => "ERROR -- manageiq: Line 3\n"
+        Systemd::JournalEntry.new(
+          {"_PID" => "789", "MESSAGE" => "ERROR -- manageiq: Line 3\n"},
+          :realtime_ts => 1_715_000_002_000_000
         )
       ]
     end

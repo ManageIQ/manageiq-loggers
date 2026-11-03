@@ -4,11 +4,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [2.1.0] - 2026-11-03
 ### Changed
 - Update the minimum ruby version to 3.2 [(#142)](https://github.com/ManageIQ/manageiq-loggers/pull/142)
+- Set timezone for journald specs [(#128)](https://github.com/ManageIQ/manageiq-loggers/pull/128)
+- Replace TZ env var with Time.use_zone in tests [(#134)](https://github.com/ManageIQ/manageiq-loggers/pull/134)
 
 ### Fixed
 - Fix JSON v3 unicode conversion [(#143)](https://github.com/ManageIQ/manageiq-loggers/pull/143)
+- Fix running tests on macOS [(#132)](https://github.com/ManageIQ/manageiq-loggers/pull/132)
+- Fix Journald#contents timestamp by using entry.realtime_timestamp [(#144)](https://github.com/ManageIQ/manageiq-loggers/pull/144)
+- Fix contents raising error when line_count/max_count is nil [(#141)](https://github.com/ManageIQ/manageiq-loggers/pull/141)
 
 ## [2.0.0] - 2026-05-19
 ### Removed
@@ -115,7 +122,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2019-01-08
 
-[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v2.0.0...master
+[Unreleased]: https://github.com/ManageIQ/manageiq-loggers/compare/v2.1.0...master
+[2.1.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.2.0...v2.0.0
 [1.2.0]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/ManageIQ/manageiq-loggers/compare/v1.1.0...v1.1.1

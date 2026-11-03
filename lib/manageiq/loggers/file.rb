@@ -26,7 +26,7 @@ module ManageIQ
           position     = file_size
 
           # Read backwards in chunks until we have enough lines
-          while position > 0 && lines.size < line_count
+          while position > 0 && (line_count.nil? || lines.size < line_count)
             # Calculate how much to read
             chunk_size = [buffer_size, position].min
             position -= chunk_size
@@ -53,7 +53,7 @@ module ManageIQ
           lines.unshift(partial_line) unless partial_line.empty?
         end
 
-        lines.last(line_count)
+        line_count ? lines.last(line_count) : lines
       end
     end
   end
